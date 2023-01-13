@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <title>Buienradar</title>
+    <style>
+        body {
+            margin: 40px auto;
+            max-width: 800px;
+            line-height: 1.6;
+            font-size: 18px;
+            color: #333;
+            padding: 0 10px;
+            font-family: sans-serif;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2;
+        }
+
+        .information {
+            background: #f3f6f9;
+            border: 1px solid #999;
+            padding: 1em;
+        }
+
+        .text-small {
+            font-size: .8em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        th, td {
+            width: 50%;
+            padding: .5em;
+            border: 1px solid #333;
+        }
+
+        figure, blockquote {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<a href="https://instruct.nl/" target="_blank" title="Ga naar de website van Instruct">
+    <img alt="Instruct logo" src="instruct.svg" style="height: 2em;">
+</a>
+
+<h1>Buienradar</h1>
+<p>Op deze pagina vind je een demonstratie van onze Buienradar JavaScript-library. Met deze library kun je
+    eenvoudig informatie uit de Buienradar API weergeven.</p>
+
+<p>Gebruik van de API is gratis, onder voorwaarde van bronvermelding (Buienradar.nl), met een hyperlink naar
+    <a href="https://www.buienradar.nl/" target="_blank">https://www.buienradar.nl/</a>.</p>
+
+<h2>Auteursrechtelijke informatie</h2>
+<div class="information">
+    <p id="buienradar_copyright"></p>
+    <p class="text-small" id="buienradar_terms"></p>
+</div>
+
+<h2>Kaart</h2>
+<img alt="Kaart" id="map" src="">
+
+<h2>Zonsopgang en -ondergang</h2>
+<table>
+    <tbody>
+    <tr>
+        <th>Zonsopgang</th>
+        <td id="sunrise"></td>
+    </tr>
+    <tr>
+        <th>Zonsondergang</th>
+        <td id="sunset"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Weerstation bij jou in de buurt (<span id="near_city"></span>)</h2>
+<p>Als je browser hier ondersteuning voor heeft, en je toestemming geeft, wordt je locatie gebruikt voor de
+    informatie hieronder. Zo niet, dan gebruiken we de locatie van het kantoor van Instruct.</p>
+
+<table>
+    <tbody>
+    <tr>
+        <th>Station (naam)</th>
+        <td id="near_station_name"></td>
+    </tr>
+    <tr>
+        <th>Station (regio)</th>
+        <td id="near_station_regio"></td>
+    </tr>
+    <tr>
+        <th>Icoon</th>
+        <td><img alt="Icoon" id="near_icon" src=""></td>
+    </tr>
+    <tr>
+        <th>Beschrijving</th>
+        <td id="near_description"></td>
+    </tr>
+    <tr>
+        <th>Temperatuur</th>
+        <td id="near_temperature_actual"></td>
+    </tr>
+    <tr>
+        <th>Grondtemperatuur</th>
+        <td id="near_temperature_ground"></td>
+    </tr>
+    <tr>
+        <th>Gevoelstemperatuur</th>
+        <td id="near_temperature_feel"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Weerstation Rotterdam</h2>
+
+<table>
+    <tbody>
+    <tr>
+        <th>Station (naam)</th>
+        <td id="rotterdam_station_name"></td>
+    </tr>
+    <tr>
+        <th>Station (regio)</th>
+        <td id="rotterdam_station_regio"></td>
+    </tr>
+    <tr>
+        <th>Icoon</th>
+        <td><img alt="Icoon" id="rotterdam_icon" src=""></td>
+    </tr>
+    <tr>
+        <th>Beschrijving</th>
+        <td id="rotterdam_description"></td>
+    </tr>
+    <tr>
+        <th>Temperatuur</th>
+        <td id="rotterdam_temperature_actual"></td>
+    </tr>
+    <tr>
+        <th>Grondtemperatuur</th>
+        <td id="rotterdam_temperature_ground"></td>
+    </tr>
+    <tr>
+        <th>Gevoelstemperatuur</th>
+        <td id="rotterdam_temperature_feel"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Weerrapport</h2>
+
+<article>
+    <section>
+        <h3 id="report_title"></h3>
+        <p class="text-small">Gepubliceerd op <span id="report_published"></span> door <span id="report_author"></span>
+        </p>
+        <div class="information text-small">
+            <p id="report_authorbio"></p>
+        </div>
+        <p id="report_summary"></p>
+        <p class="text-small" id="report_text"></p>
+    </section>
+
+    <section>
+        <h3>Korte termijn</h3>
+        <p class="text-small">Van <span id="shortterm_start"></span> tot <span id="shortterm_end"></span></p>
+        <p id="shortterm_forecast"></p>
+    </section>
+
+    <section>
+        <h3>Lange termijn</h3>
+        <p class="text-small">Van <span id="longterm_start"></span> tot <span id="longterm_end"></span></p>
+        <p id="longterm_forecast"></p>
+    </section>
+</article>
+
+<h2>Vijf-daagse voorspelling</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th id="fiveday_1_date"></th>
+        <th id="fiveday_2_date"></th>
+        <th id="fiveday_3_date"></th>
+        <th id="fiveday_4_date"></th>
+        <th id="fiveday_5_date"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th>Temperatuur (min.)</th>
+        <td id="fiveday_1_temperature_min"></td>
+        <td id="fiveday_2_temperature_min"></td>
+        <td id="fiveday_3_temperature_min"></td>
+        <td id="fiveday_4_temperature_min"></td>
+        <td id="fiveday_5_temperature_min"></td>
+    </tr>
+    <tr>
+        <th>Temperatuur (max.)</th>
+        <td id="fiveday_1_temperature_max"></td>
+        <td id="fiveday_2_temperature_max"></td>
+        <td id="fiveday_3_temperature_max"></td>
+        <td id="fiveday_4_temperature_max"></td>
+        <td id="fiveday_5_temperature_max"></td>
+    </tr>
+    <tr>
+        <th>Regenkans</th>
+        <td><span id="fiveday_1_rain_chance"></span>%</td>
+        <td><span id="fiveday_2_rain_chance"></span>%</td>
+        <td><span id="fiveday_3_rain_chance"></span>%</td>
+        <td><span id="fiveday_4_rain_chance"></span>%</td>
+        <td><span id="fiveday_5_rain_chance"></span>%</td>
+    </tr>
+    <tr>
+        <th>Regen (mm, min.)</th>
+        <td id="fiveday_1_rain_mm_min"></td>
+        <td id="fiveday_2_rain_mm_min"></td>
+        <td id="fiveday_3_rain_mm_min"></td>
+        <td id="fiveday_4_rain_mm_min"></td>
+        <td id="fiveday_5_rain_mm_min"></td>
+    </tr>
+    <tr>
+        <th>Regen (mm, min.)</th>
+        <td id="fiveday_1_rain_mm_max"></td>
+        <td id="fiveday_2_rain_mm_max"></td>
+        <td id="fiveday_3_rain_mm_max"></td>
+        <td id="fiveday_4_rain_mm_max"></td>
+        <td id="fiveday_5_rain_mm_max"></td>
+    </tr>
+    <tr>
+        <th>Zonkans</th>
+        <td><span id="fiveday_1_sun"></span>%</td>
+        <td><span id="fiveday_2_sun"></span>%</td>
+        <td><span id="fiveday_3_sun"></span>%</td>
+        <td><span id="fiveday_4_sun"></span>%</td>
+        <td><span id="fiveday_5_sun"></span>%</td>
+    </tr>
+    <tr>
+        <th>Windrichting</th>
+        <td id="fiveday_1_wind_direction"></td>
+        <td id="fiveday_2_wind_direction"></td>
+        <td id="fiveday_3_wind_direction"></td>
+        <td id="fiveday_4_wind_direction"></td>
+        <td id="fiveday_5_wind_direction"></td>
+    </tr>
+    <tr>
+        <th>Windsnelheid</th>
+        <td id="fiveday_1_wind_speed"></td>
+        <td id="fiveday_2_wind_speed"></td>
+        <td id="fiveday_3_wind_speed"></td>
+        <td id="fiveday_4_wind_speed"></td>
+        <td id="fiveday_5_wind_speed"></td>
+    </tr>
+    <tr>
+        <th>Omschrijving</th>
+        <td id="fiveday_1_description"></td>
+        <td id="fiveday_2_description"></td>
+        <td id="fiveday_3_description"></td>
+        <td id="fiveday_4_description"></td>
+        <td id="fiveday_5_description"></td>
+    </tr>
+    <tr>
+        <th>Icoon</th>
+        <td><img alt="Icoon" id="fiveday_1_icon" src=""></td>
+        <td><img alt="Icoon" id="fiveday_2_icon" src=""></td>
+        <td><img alt="Icoon" id="fiveday_3_icon" src=""></td>
+        <td><img alt="Icoon" id="fiveday_4_icon" src=""></td>
+        <td><img alt="Icoon" id="fiveday_5_icon" src=""></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Regengrafiek</h2>
+<div id="regengrafiek"></div>
+
+<script src="../src/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    buienradar.load(function () {
+        buienradar.map('map');
+
+        buienradar.buienradar.copyright('buienradar_copyright');
+        buienradar.buienradar.terms('buienradar_terms');
+
+        buienradar.date.time('sunrise', buienradar.sunrise());
+        buienradar.date.time('sunset', buienradar.sunset());
+
+        buienradar.currentLocation.cityName('near_city');
+
+        buienradar.currentLocation.station.name('near_station_name');
+        buienradar.currentLocation.station.regio('near_station_regio');
+        buienradar.currentLocation.icon('near_icon');
+        buienradar.currentLocation.description('near_description');
+        buienradar.currentLocation.temperature.actual('near_temperature_actual');
+        buienradar.currentLocation.temperature.ground('near_temperature_ground');
+        buienradar.currentLocation.temperature.feel('near_temperature_feel');
+
+        buienradar.weatherStation.station.name(6344, 'rotterdam_station_name');
+        buienradar.weatherStation.station.regio(6344, 'rotterdam_station_regio');
+        buienradar.weatherStation.icon(6344, 'rotterdam_icon');
+        buienradar.weatherStation.description(6344, 'rotterdam_description');
+        buienradar.weatherStation.temperature.actual(6344, 'rotterdam_temperature_actual');
+        buienradar.weatherStation.temperature.ground(6344, 'rotterdam_temperature_ground');
+        buienradar.weatherStation.temperature.feel(6344, 'rotterdam_temperature_feel');
+
+        buienradar.date.date('report_published', buienradar.forecast.report.published());
+        buienradar.forecast.report.title('report_title');
+        buienradar.forecast.report.summary('report_summary');
+        buienradar.forecast.report.text('report_text');
+        buienradar.forecast.report.author('report_author');
+        buienradar.forecast.report.authorBio('report_authorbio');
+
+        buienradar.date.date('shortterm_start', buienradar.forecast.shortTerm.start());
+        buienradar.date.date('shortterm_end', buienradar.forecast.shortTerm.end());
+        buienradar.forecast.shortTerm.forecast('shortterm_forecast');
+
+        buienradar.date.date('longterm_start', buienradar.forecast.longTerm.start());
+        buienradar.date.date('longterm_end', buienradar.forecast.longTerm.end());
+        buienradar.forecast.longTerm.forecast('longterm_forecast');
+
+        for (let day = 1; day <= 5; day++) {
+            buienradar.date.name(`fiveday_${day}_date`, buienradar.forecast.fiveDays.date(day));
+
+            buienradar.forecast.fiveDays.temperature.min(`fiveday_${day}_temperature_min`, day);
+            buienradar.forecast.fiveDays.temperature.max(`fiveday_${day}_temperature_max`, day);
+
+            buienradar.forecast.fiveDays.rain.chance(`fiveday_${day}_rain_chance`, day);
+            buienradar.forecast.fiveDays.rain.mmMin(`fiveday_${day}_rain_mm_min`, day);
+            buienradar.forecast.fiveDays.rain.mmMax(`fiveday_${day}_rain_mm_max`, day);
+
+            buienradar.forecast.fiveDays.sunChance(`fiveday_${day}_sun`, day);
+
+            buienradar.forecast.fiveDays.wind.direction(`fiveday_${day}_wind_direction`, day);
+            buienradar.forecast.fiveDays.wind.speed(`fiveday_${day}_wind_speed`, day);
+
+            buienradar.forecast.fiveDays.description(`fiveday_${day}_description`, day);
+
+            buienradar.forecast.fiveDays.icon(`fiveday_${day}_icon`, day);
+        }
+
+        buienradar.showRainChart('regengrafiek');
+    });
+</script>
+</body>
+</html>

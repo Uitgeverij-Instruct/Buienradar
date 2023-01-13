@@ -1,0 +1,21 @@
+{
+  "name": "@instruct/buienradar",
+  "version": "1.0.0",
+  "description": "JavaScript-library om eenvoudig data uit de Buienradar API op te halen en weer te geven.",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uitgeverij-Instruct/Buienradar.git"
+  },
+  "keywords": [
+    "buienradar",
+    "api",
+    "json"
+  ],
+  "author": "Wouter van den Brink <wouter@instruct.nl>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Uitgeverij-Instruct/Buienradar/issues"
+  },
+  "homepage": "https://github.com/Uitgeverij-Instruct/Buienradar#readme"
+}
