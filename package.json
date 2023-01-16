@@ -1,5 +1,5 @@
 {
-  "name": "@instruct/buienradar",
+  "name": "@uitgeverij-instruct/buienradar",
   "version": "1.0.0",
   "description": "JavaScript-library om eenvoudig data uit de Buienradar API op te halen en weer te geven.",
   "main": "src/index.js",
