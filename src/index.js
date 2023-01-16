@@ -1,35 +1,59 @@
 (function () {
     const BUIENRADAR_API = 'https://data.buienradar.nl/2.0/feed/json';
+    const CITIES_API = 'https://files.instruct.nl/fundament/buienradar/cities.js';
 
     const CACHE_MS = 300_000;
 
-    const LS_UPDATED_AT = 'nl.instruct.buienradar.updatedAt';
-    const LS_CACHE = 'nl.instruct.buienradar.cache';
+    const LS_CACHE = 'nl.instruct.buienradar';
 
     const ERROR_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAUUlEQVQoz2P4DwQMDP+JAWBlDCAKggiqBiMGZA5B1WAbMITwqEbSgEsPhiBeaWxGMOB0AA5H4nU0Ni9RroE0J5HmadKClbSIIy1pkJn4iE7eALWZVcf6S1ptAAAAAElFTkSuQmCC';
 
     const POS_INSTRUCT = {lat: 52.071, lon: 4.763};
 
     let data = null;
+    // noinspection JSMismatchedCollectionQueryUpdate
+    let cities = [];
     let pos = POS_INSTRUCT;
 
-    async function load(callback, refresh = false) {
-        const updatedAt = parseInt(localStorage.getItem(LS_UPDATED_AT), 10);
+    async function cachedFetch(url, json = true) {
+        const now = +new Date();
+
+        let cache = {};
 
         try {
-            data = JSON.parse(localStorage.getItem(LS_CACHE));
+            cache = JSON.parse(localStorage.getItem(LS_CACHE)) || {};
         } catch (e) {
         }
 
-        const delta = (+new Date()) - updatedAt;
-
-        if (refresh || delta > CACHE_MS || data === null) {
-            const res = await fetch(BUIENRADAR_API);
-            data = await res.json();
-            localStorage.setItem(LS_UPDATED_AT, +new Date());
+        for (let key in cache) {
+            if (now - cache[key].ts > CACHE_MS) {
+                delete cache[key];
+            }
         }
 
-        localStorage.setItem(LS_CACHE, JSON.stringify(data));
+        if (typeof cache[url] === 'undefined') {
+            cache[url] = {
+                data: null,
+                ts: 0
+            };
+        }
+
+        if (now - cache[url].ts > CACHE_MS || cache[url].data === null) {
+            const res = await fetch(url, {credentials: 'omit'});
+            cache[url].data = json ? (await res.json()) : (await res.text());
+            cache[url].ts = now;
+        }
+
+        localStorage.setItem(LS_CACHE, JSON.stringify(cache));
+        return cache[url].data;
+    }
+
+    async function load(callback) {
+        const script = document.createElement('script');
+        script.src = CITIES_API;
+        document.body.appendChild(script);
+
+        data = await cachedFetch(BUIENRADAR_API);
 
         pos = await getLocation();
 
@@ -192,8 +216,8 @@
             return;
         }
 
-        const res = await fetch(`https://gpsgadget.buienradar.nl/data/raintext?lat=${pos.lat}&lon=${pos.lon}`);
-        const dataPoints = (await res.text()).split("\n").map((line) => {
+        const res = await cachedFetch(`https://gpsgadget.buienradar.nl/data/raintext?lat=${pos.lat}&lon=${pos.lon}`, false);
+        const dataPoints = res.split("\n").map((line) => {
             const matches = line.match(/^(\d{3})\|(\d\d:\d\d)/);
 
             if (matches === null) {
@@ -239,7 +263,11 @@
         new Chart(canvas, config);
     }
 
+    // noinspection JSUnusedGlobalSymbols
     window.buienradar = {
+        __loadCityDatabase: function (data) {
+            cities = data;
+        },
         load,
         date: {
             name: rendererForDate((date) => {
@@ -274,11 +302,32 @@
         map: rendererForNestedProperty('actual.actualradarurl', 'src', ERROR_IMG),
         currentLocation: {
             cityName: renderer(async () => {
-                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.lat}&lon=${pos.lon}`);
-                const data = await res.json();
-                if (data && data.address) {
-                    return data.address.city ?? data.address.town ?? '-';
-                }
+                await new Promise((resolve, reject) => {
+                    let tries = 0;
+                    const i = setInterval(() => {
+                        tries++;
+
+                        if (cities.length) {
+                            clearInterval(i);
+                            resolve();
+                        }
+
+                        if (tries >= 20) {
+                            reject(new Error('Stadsdatabase komt niet binnen na 20 pogingen'));
+                        }
+                    }, 50);
+                });
+
+                return cities.reduce(({nearest, distance}, city) => {
+                    const [lat, lon, name] = city;
+                    const cityDistance = getDistance(pos, {lat, lon});
+
+                    if (cityDistance < distance) {
+                        return {nearest: name, distance: cityDistance};
+                    } else {
+                        return {nearest, distance};
+                    }
+                }, {nearest: null, distance: Infinity}).nearest ?? null;
             }),
             station: {
                 name: rendererForNearestStation('stationname'),
