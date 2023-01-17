@@ -13,7 +13,7 @@
     "json"
   ],
   "author": "Wouter van den Brink <wouter@instruct.nl>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Uitgeverij-Instruct/Buienradar/issues"
   },
