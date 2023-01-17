@@ -50,7 +50,7 @@ De meeste functies verwachten een element waar tekst in kan worden geplaatst, zo
 
 Een aantal functies moeten juist gebruikt worden op een afbeelding (`<img>`). Deze functies zijn gemarkeerd met `(afbeelding)`.
 
-## Datum en tijd
+### Datum en tijd
 Een aantal functies laten zelf niks zien, maar geven een datum en/of tijd terug. Je moet dan de volgende functies gebruiken om de informatie weer te geven op je website:
 - `buienradar.date.name(id, datumEnTijd)` — Laat de naam van de week zien.
 - `buienradar.date.date(id, datumEnTijd)` — Laat de datum zien (jaar-maand-dag).
