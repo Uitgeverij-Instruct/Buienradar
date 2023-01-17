@@ -6,7 +6,7 @@
     <style>
         body {
             margin: 40px auto;
-            max-width: 800px;
+            max-width: 1200px;
             line-height: 1.6;
             font-size: 18px;
             color: #333;
@@ -31,6 +31,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
         th {
@@ -38,8 +39,8 @@
         }
 
         th, td {
-            width: 50%;
-            padding: .5em;
+            width: 100%;
+            padding: .25em;
             border: 1px solid #333;
         }
 
@@ -98,24 +99,19 @@
         <td id="near_station_regio"></td>
     </tr>
     <tr>
-        <th>Icoon</th>
-        <td><img alt="Icoon" id="near_icon" src=""></td>
-    </tr>
-    <tr>
         <th>Beschrijving</th>
-        <td id="near_description"></td>
+        <td>
+            <img alt="Icoon" id="near_icon" src="" style="height: 1em">
+            <span id="near_description"></span>
+        </td>
     </tr>
     <tr>
         <th>Temperatuur</th>
-        <td id="near_temperature_actual"></td>
-    </tr>
-    <tr>
-        <th>Grondtemperatuur</th>
-        <td id="near_temperature_ground"></td>
-    </tr>
-    <tr>
-        <th>Gevoelstemperatuur</th>
-        <td id="near_temperature_feel"></td>
+        <td>
+            Huidig: <span id="near_temperature_actual"></span> &deg;C <br>
+            Grond: <span id="near_temperature_ground"></span> &deg;C <br>
+            Gevoel: <span id="near_temperature_feel"></span> &deg;C <br>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -133,24 +129,19 @@
         <td id="rotterdam_station_regio"></td>
     </tr>
     <tr>
-        <th>Icoon</th>
-        <td><img alt="Icoon" id="rotterdam_icon" src=""></td>
-    </tr>
-    <tr>
         <th>Beschrijving</th>
-        <td id="rotterdam_description"></td>
+        <td>
+            <img alt="Icoon" id="rotterdam_icon" src="" style="height: 1em">
+            <span id="rotterdam_description"></span>
+        </td>
     </tr>
     <tr>
         <th>Temperatuur</th>
-        <td id="rotterdam_temperature_actual"></td>
-    </tr>
-    <tr>
-        <th>Grondtemperatuur</th>
-        <td id="rotterdam_temperature_ground"></td>
-    </tr>
-    <tr>
-        <th>Gevoelstemperatuur</th>
-        <td id="rotterdam_temperature_feel"></td>
+        <td>
+            Huidig: <span id="rotterdam_temperature_actual"></span> &deg;C <br>
+            Grond: <span id="rotterdam_temperature_ground"></span> &deg;C <br>
+            Gevoel: <span id="rotterdam_temperature_feel"></span> &deg;C <br>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -197,20 +188,12 @@
     </thead>
     <tbody>
     <tr>
-        <th>Temperatuur (min.)</th>
-        <td id="fiveday_1_temperature_min"></td>
-        <td id="fiveday_2_temperature_min"></td>
-        <td id="fiveday_3_temperature_min"></td>
-        <td id="fiveday_4_temperature_min"></td>
-        <td id="fiveday_5_temperature_min"></td>
-    </tr>
-    <tr>
-        <th>Temperatuur (max.)</th>
-        <td id="fiveday_1_temperature_max"></td>
-        <td id="fiveday_2_temperature_max"></td>
-        <td id="fiveday_3_temperature_max"></td>
-        <td id="fiveday_4_temperature_max"></td>
-        <td id="fiveday_5_temperature_max"></td>
+        <th>Temperatuur</th>
+        <td><span id="fiveday_1_temperature_min"></span> &deg;C <br> <span id="fiveday_1_temperature_max"></span> &deg;C</td>
+        <td><span id="fiveday_2_temperature_min"></span> &deg;C <br> <span id="fiveday_2_temperature_max"></span> &deg;C</td>
+        <td><span id="fiveday_3_temperature_min"></span> &deg;C <br> <span id="fiveday_3_temperature_max"></span> &deg;C</td>
+        <td><span id="fiveday_4_temperature_min"></span> &deg;C <br> <span id="fiveday_4_temperature_max"></span> &deg;C</td>
+        <td><span id="fiveday_5_temperature_min"></span> &deg;C <br> <span id="fiveday_5_temperature_max"></span> &deg;C</td>
     </tr>
     <tr>
         <th>Regenkans</th>
@@ -221,20 +204,12 @@
         <td><span id="fiveday_5_rain_chance"></span>%</td>
     </tr>
     <tr>
-        <th>Regen (mm, min.)</th>
-        <td id="fiveday_1_rain_mm_min"></td>
-        <td id="fiveday_2_rain_mm_min"></td>
-        <td id="fiveday_3_rain_mm_min"></td>
-        <td id="fiveday_4_rain_mm_min"></td>
-        <td id="fiveday_5_rain_mm_min"></td>
-    </tr>
-    <tr>
-        <th>Regen (mm, min.)</th>
-        <td id="fiveday_1_rain_mm_max"></td>
-        <td id="fiveday_2_rain_mm_max"></td>
-        <td id="fiveday_3_rain_mm_max"></td>
-        <td id="fiveday_4_rain_mm_max"></td>
-        <td id="fiveday_5_rain_mm_max"></td>
+        <th>Regen</th>
+        <td><span id="fiveday_1_rain_mm_min"></span> - <span id="fiveday_1_rain_mm_max"></span> mm/uur</td>
+        <td><span id="fiveday_2_rain_mm_min"></span> - <span id="fiveday_2_rain_mm_max"></span> mm/uur</td>
+        <td><span id="fiveday_3_rain_mm_min"></span> - <span id="fiveday_3_rain_mm_max"></span> mm/uur</td>
+        <td><span id="fiveday_4_rain_mm_min"></span> - <span id="fiveday_4_rain_mm_max"></span> mm/uur</td>
+        <td><span id="fiveday_5_rain_mm_min"></span> - <span id="fiveday_5_rain_mm_max"></span> mm/uur</td>
     </tr>
     <tr>
         <th>Zonkans</th>
@@ -245,36 +220,20 @@
         <td><span id="fiveday_5_sun"></span>%</td>
     </tr>
     <tr>
-        <th>Windrichting</th>
-        <td id="fiveday_1_wind_direction"></td>
-        <td id="fiveday_2_wind_direction"></td>
-        <td id="fiveday_3_wind_direction"></td>
-        <td id="fiveday_4_wind_direction"></td>
-        <td id="fiveday_5_wind_direction"></td>
+        <th>Wind</th>
+        <td><span id="fiveday_1_wind_direction"></span> <span id="fiveday_1_wind_speed"></span></td>
+        <td><span id="fiveday_2_wind_direction"></span> <span id="fiveday_2_wind_speed"></span></td>
+        <td><span id="fiveday_3_wind_direction"></span> <span id="fiveday_3_wind_speed"></span></td>
+        <td><span id="fiveday_4_wind_direction"></span> <span id="fiveday_4_wind_speed"></span></td>
+        <td><span id="fiveday_5_wind_direction"></span> <span id="fiveday_5_wind_speed"></span></td>
     </tr>
     <tr>
-        <th>Windsnelheid</th>
-        <td id="fiveday_1_wind_speed"></td>
-        <td id="fiveday_2_wind_speed"></td>
-        <td id="fiveday_3_wind_speed"></td>
-        <td id="fiveday_4_wind_speed"></td>
-        <td id="fiveday_5_wind_speed"></td>
-    </tr>
-    <tr>
-        <th>Omschrijving</th>
-        <td id="fiveday_1_description"></td>
-        <td id="fiveday_2_description"></td>
-        <td id="fiveday_3_description"></td>
-        <td id="fiveday_4_description"></td>
-        <td id="fiveday_5_description"></td>
-    </tr>
-    <tr>
-        <th>Icoon</th>
-        <td><img alt="Icoon" id="fiveday_1_icon" src=""></td>
-        <td><img alt="Icoon" id="fiveday_2_icon" src=""></td>
-        <td><img alt="Icoon" id="fiveday_3_icon" src=""></td>
-        <td><img alt="Icoon" id="fiveday_4_icon" src=""></td>
-        <td><img alt="Icoon" id="fiveday_5_icon" src=""></td>
+        <th>Beschrijving</th>
+        <td><img alt="Icoon" id="fiveday_1_icon" src=""> <span id="fiveday_1_description"></span></td>
+        <td><img alt="Icoon" id="fiveday_2_icon" src=""> <span id="fiveday_2_description"></span></td>
+        <td><img alt="Icoon" id="fiveday_3_icon" src=""> <span id="fiveday_3_description"></span></td>
+        <td><img alt="Icoon" id="fiveday_4_icon" src=""> <span id="fiveday_4_description"></span></td>
+        <td><img alt="Icoon" id="fiveday_5_icon" src=""> <span id="fiveday_5_description"></span></td>
     </tr>
     </tbody>
 </table>
