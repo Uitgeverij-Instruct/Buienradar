@@ -420,8 +420,8 @@
             fiveDays: {
                 date: fiveDayForecastResolver('day'),
                 temperature: {
-                    min: rendererForFiveDayForecast('mintemperature'),
-                    max: rendererForFiveDayForecast('maxtemperature'),
+                    min: rendererForFiveDayForecast('mintemperatureMin'),
+                    max: rendererForFiveDayForecast('maxtemperatureMax'),
                 },
                 rain: {
                     chance: rendererForFiveDayForecast('rainChance'),
