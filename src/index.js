@@ -143,7 +143,7 @@
         return renderer(() => {
             const station = getNearestWeatherStation(property);
 
-            if (station && station[property]) {
+            if (station && typeof station[property] !== 'undefined') {
                 return station[property];
             }
 
