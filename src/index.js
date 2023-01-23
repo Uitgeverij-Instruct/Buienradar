@@ -125,11 +125,11 @@
                 value = errorValue;
             }
 
-            if (id) {
+            if (typeof id !== 'undefined' && id !== null) {
                 const element = document.getElementById(id);
 
                 if (element === null) {
-                    console.error(`Je probeerde informatie weer te geven op een niet-bestaand element met ID ${id}!`);
+                    console.warn(`Je probeerde informatie weer te geven op een niet-bestaand element met ID ${id}!`);
                 } else {
                     element[attribute] = value;
                 }
@@ -194,6 +194,7 @@
         return (id, day) => {
             if (typeof day === 'undefined') {
                 day = id;
+                id = null;
             }
             return renderer(() => fiveDayForecastResolver(property)(day), attribute, errorValue)(id);
         };
@@ -223,6 +224,7 @@
         return (id, date) => {
             if (typeof date === 'undefined') {
                 date = id;
+                id = null;
             }
 
             if (Object.prototype.toString.call(date) !== '[object Date]') {
