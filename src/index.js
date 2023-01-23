@@ -352,7 +352,7 @@
                 feel: rendererForNearestStation('feeltemperature'),
             },
             wind: {
-                direction: rendererForNearestStation('windidrection'),
+                direction: rendererForNearestStation('winddirection'),
                 directionDegrees: rendererForNearestStation('winddirectiondegrees'),
                 gusts: rendererForNearestStation('windgusts'),
                 speed: rendererForNearestStation('windspeed'),
