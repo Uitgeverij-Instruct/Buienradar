@@ -143,7 +143,11 @@
         return renderer(() => {
             const station = getNearestWeatherStation(property);
 
-            if (station && typeof station[property] !== 'undefined') {
+            if (!station) {
+                throw new Error(`Station met ID ${stationId} bestaat niet`);
+            }
+
+            if (typeof station[property] !== 'undefined') {
                 return station[property];
             }
 
