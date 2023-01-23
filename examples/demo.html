@@ -47,6 +47,10 @@
         figure, blockquote {
             margin: 0;
         }
+
+        #direct code {
+            font-size: .8em;
+        }
     </style>
 </head>
 <body>
@@ -189,11 +193,16 @@
     <tbody>
     <tr>
         <th>Temperatuur</th>
-        <td><span id="fiveday_1_temperature_min"></span> &deg;C <br> <span id="fiveday_1_temperature_max"></span> &deg;C</td>
-        <td><span id="fiveday_2_temperature_min"></span> &deg;C <br> <span id="fiveday_2_temperature_max"></span> &deg;C</td>
-        <td><span id="fiveday_3_temperature_min"></span> &deg;C <br> <span id="fiveday_3_temperature_max"></span> &deg;C</td>
-        <td><span id="fiveday_4_temperature_min"></span> &deg;C <br> <span id="fiveday_4_temperature_max"></span> &deg;C</td>
-        <td><span id="fiveday_5_temperature_min"></span> &deg;C <br> <span id="fiveday_5_temperature_max"></span> &deg;C</td>
+        <td><span id="fiveday_1_temperature_min"></span> &deg;C <br> <span id="fiveday_1_temperature_max"></span> &deg;C
+        </td>
+        <td><span id="fiveday_2_temperature_min"></span> &deg;C <br> <span id="fiveday_2_temperature_max"></span> &deg;C
+        </td>
+        <td><span id="fiveday_3_temperature_min"></span> &deg;C <br> <span id="fiveday_3_temperature_max"></span> &deg;C
+        </td>
+        <td><span id="fiveday_4_temperature_min"></span> &deg;C <br> <span id="fiveday_4_temperature_max"></span> &deg;C
+        </td>
+        <td><span id="fiveday_5_temperature_min"></span> &deg;C <br> <span id="fiveday_5_temperature_max"></span> &deg;C
+        </td>
     </tr>
     <tr>
         <th>Regenkans</th>
@@ -241,10 +250,194 @@
 <h2>Regengrafiek</h2>
 <div id="regengrafiek"></div>
 
+<h2>Direct gegevens opvragen</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Resultaat</th>
+    </tr>
+    </thead>
+    <tbody id="direct">
+    <tr>
+        <th><code>buienradar.buienradar.copyright()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.buienradar.terms()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.time(buienradar.sunrise())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.time(buienradar.sunset())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.cityName()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.station.name()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.station.regio()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.icon()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.description()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.temperature.actual()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.temperature.ground()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.currentLocation.temperature.feel()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.station.name(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.station.regio(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.icon(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.description(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.temperature.actual(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.temperature.ground(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.weatherStation.temperature.feel(6344)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.date(buienradar.forecast.report.published())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.report.title()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.report.summary()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.report.text()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.report.author()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.report.authorBio()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.date(buienradar.forecast.shortTerm.start())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.date(buienradar.forecast.shortTerm.end())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.shortTerm.forecast()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.date(buienradar.forecast.longTerm.start())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.date(buienradar.forecast.longTerm.end())</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.longTerm.forecast()</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.date.name(buienradar.forecast.fiveDays.date(1))</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.temperature.min(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.temperature.max(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.rain.chance(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.rain.mmMin(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.rain.mmMax(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.sunChance(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.wind.direction(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.wind.speed(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.description(1)</code></th>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>buienradar.forecast.fiveDays.icon(1)</code></th>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
 <script src="../src/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script>
     buienradar.load(function () {
+
+            console.log(buienradar.currentLocation.temperature.actual('temperatuur'));
+        console.log(buienradar.currentLocation.temperature.actual());
         buienradar.map('map');
 
         buienradar.buienradar.copyright('buienradar_copyright');
@@ -307,6 +500,27 @@
         }
 
         buienradar.showRainChart('regengrafiek');
+
+        const trs = Array.from(document.getElementById('direct').getElementsByTagName('tr'));
+
+        trs.forEach((tr) => {
+            const query = tr.getElementsByTagName('th').item(0).textContent;
+
+            const displayCode = document.createElement('code');
+
+            try {
+                displayCode.textContent = eval(query);
+
+                if (displayCode.textContent.length > 100) {
+                    displayCode.textContent = displayCode.textContent.substring(0, 100) + '...';
+                }
+            } catch (e) {
+                displayCode.textContent = e.message;
+                displayCode.style.color = '#f00';
+            }
+
+            tr.getElementsByTagName('td').item(0).appendChild(displayCode);
+        })
     });
 </script>
 </body>

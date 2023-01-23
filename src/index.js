@@ -48,6 +48,12 @@
         return cache[url].data;
     }
 
+    async function delay(ms) {
+        return new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
+    }
+
     async function load(callback) {
         const script = document.createElement('script');
         script.src = CITIES_API;
@@ -56,6 +62,13 @@
         data = await cachedFetch(BUIENRADAR_API);
 
         pos = await getLocation();
+
+        for (let i = 0; i < 20; i++) {
+            if (cities.length) {
+                break;
+            }
+            await delay(50);
+        }
 
         callback.bind(window)();
     }
@@ -104,20 +117,25 @@
     }
 
     function renderer(resolver, attribute = 'textContent', errorValue = '-') {
-        return async (id) => {
-            const e = document.getElementById(id);
-
-            if (e === null) {
-                console.error(`Je probeerde informatie weer te geven op een niet-bestaand element met ID ${id}!`);
-                return;
-            }
-
+        return (id) => {
+            let value;
             try {
-                e[attribute] = await resolver();
+                value = resolver();
             } catch (e) {
-                console.error(e);
-                e[attribute] = errorValue;
+                value = errorValue;
             }
+
+            if (id) {
+                const element = document.getElementById(id);
+
+                if (element === null) {
+                    console.error(`Je probeerde informatie weer te geven op een niet-bestaand element met ID ${id}!`);
+                } else {
+                    element[attribute] = value;
+                }
+            }
+
+            return value;
         };
     }
 
@@ -135,7 +153,7 @@
 
     function rendererForStation(property, attribute = 'textContent', errorValue = '-') {
         return (stationId, id) => {
-            renderer(() => {
+            return renderer(() => {
                 const station = data.actual.stationmeasurements.find((s) => s.stationid === stationId);
 
                 if (!station) {
@@ -174,7 +192,10 @@
 
     function rendererForFiveDayForecast(property, attribute = 'textContent', errorValue = '-') {
         return (id, day) => {
-            renderer(() => fiveDayForecastResolver(property)(day), attribute, errorValue)(id);
+            if (typeof day === 'undefined') {
+                day = id;
+            }
+            return renderer(() => fiveDayForecastResolver(property)(day), attribute, errorValue)(id);
         };
     }
 
@@ -200,11 +221,15 @@
 
     function rendererForDate(resolver) {
         return (id, date) => {
+            if (typeof date === 'undefined') {
+                date = id;
+            }
+
             if (Object.prototype.toString.call(date) !== '[object Date]') {
                 date = new Date(date);
             }
 
-            renderer(() => resolver(date))(id);
+            return renderer(() => resolver(date))(id);
         };
     }
 
@@ -301,23 +326,7 @@
         sunset: nestedPropertyResolver('actual.sunset'),
         map: rendererForNestedProperty('actual.actualradarurl', 'src', ERROR_IMG),
         currentLocation: {
-            cityName: renderer(async () => {
-                await new Promise((resolve, reject) => {
-                    let tries = 0;
-                    const i = setInterval(() => {
-                        tries++;
-
-                        if (cities.length) {
-                            clearInterval(i);
-                            resolve();
-                        }
-
-                        if (tries >= 20) {
-                            reject(new Error('Stadsdatabase komt niet binnen na 20 pogingen'));
-                        }
-                    }, 50);
-                });
-
+            cityName: renderer(() => {
                 return cities.reduce(({nearest, distance}, city) => {
                     const [lat, lon, name] = city;
                     const cityDistance = getDistance(pos, {lat, lon});

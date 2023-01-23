@@ -50,6 +50,17 @@ De meeste functies verwachten een element waar tekst in kan worden geplaatst, zo
 
 Een aantal functies moeten juist gebruikt worden op een afbeelding (`<img>`). Deze functies zijn gemarkeerd met `(afbeelding)`.
 
+Voor alle functies geldt dat je het `id`-argument kunt weglaten. Dan wordt de opgevraagde waarde niet weergegeven op een bepaald element.
+
+In alle gevallen zal de functie de opgevraagde waarde retourneren, ook als je de waarde wel laat zien. Onderstaande code toont dus twee keer de huidige temperatuur in de console. Deze functionaliteit kan handig zijn als je later iets met de opgevraagde waarde wil doen, zoals de stijl van het element aanpassen of de waarde omzetten in een andere eenheid.
+
+```javascript
+buienradar.load(function () {
+    console.log(buienradar.currentLocation.temperature.actual('temperatuur'));
+    console.log(buienradar.currentLocation.temperature.actual());
+})
+```
+
 ### Datum en tijd
 Een aantal functies laten zelf niks zien, maar geven een datum en/of tijd terug. Je moet dan de volgende functies gebruiken om de informatie weer te geven op je website:
 - `buienradar.date.name(id, datumEnTijd)` — Laat de naam van de week zien.
