@@ -100,6 +100,18 @@ Als je browser hier ondersteuning voor heeft, en je toestemming geeft, wordt de 
 - `buienradar.currentLocation.temperature.actual(id)` — Laat de huidige temperatuur zien.
 - `buienradar.currentLocation.temperature.ground(id)` — Laat de huidige grondtemperatuur zien.
 - `buienradar.currentLocation.temperature.feel(id)` — Laat de huidige gevoelstemperatuur zien.
+- `buienradar.currentLocation.wind.direction(id)` — Laat de huidige windrichting zien.
+- `buienradar.currentLocation.wind.directionDegrees(id)` — Laat de huidige windrichting in graden zien.
+- `buienradar.currentLocation.wind.gusts(id)` — Laat de huidige windstoten zien.
+- `buienradar.currentLocation.wind.speed(id)` — Laat de huidige windsnelheid zien.
+- `buienradar.currentLocation.wind.speedBft(id)` — Laat de huidige windsnelheid zien in Beaufort.
+- `buienradar.currentLocation.airPressure(id)` — Laat de huidige luchtdruk zien.
+- `buienradar.currentLocation.visibility(id)` — Laat het huidige zicht zien.
+- `buienradar.currentLocation.humidity(id)` — Laat de huidige luchtvochtigheid zien.
+- `buienradar.currentLocation.sunPower(id)` — Laat de huidige zonkracht zien.
+- `buienradar.currentLocation.rain.now(id)` — Laat de huidige hoeveelheid neerslag zien.
+- `buienradar.currentLocation.rain.last24Hours(id)` — Laat de hoeveelheid neerslag in de afgelopen 24 uur zien.
+- `buienradar.currentLocation.rain.lastHour(id)` — Laat de hoeveelheid neerslag in het afgelopen uur zien.
 
 ### Voor een specifiek weerstation
 Deze functies zijn bijna hetzelfde als de functies voor het weerstation in de buurt, maar hebben een extra eerste parameter. Dit is het weerstationnummer van een station waarvoor je de informatie wil hebben.
@@ -112,6 +124,18 @@ Deze functies zijn bijna hetzelfde als de functies voor het weerstation in de bu
 - `buienradar.weatherStation.temperature.actual(stationNummer, id)` — Laat de huidige temperatuur zien.
 - `buienradar.weatherStation.temperature.ground(stationNummer, id)` — Laat de huidige grondtemperatuur zien.
 - `buienradar.weatherStation.temperature.feel(stationNummer, id)` — Laat de huidige gevoelstemperatuur zien.
+- `buienradar.weatherStation.wind.direction(stationNummer, id)` — Laat de huidige windrichting zien.
+- `buienradar.weatherStation.wind.directionDegrees(stationNummer, id)` — Laat de huidige windrichting in graden zien.
+- `buienradar.weatherStation.wind.gusts(stationNummer, id)` — Laat de huidige windstoten zien.
+- `buienradar.weatherStation.wind.speed(stationNummer, id)` — Laat de huidige windsnelheid zien.
+- `buienradar.weatherStation.wind.speedBft(stationNummer, id)` — Laat de huidige windsnelheid zien in Beaufort.
+- `buienradar.weatherStation.airPressure(stationNummer, id)` — Laat de huidige luchtdruk zien.
+- `buienradar.weatherStation.visibility(stationNummer, id)` — Laat het huidige zicht zien.
+- `buienradar.weatherStation.humidity(stationNummer, id)` — Laat de huidige luchtvochtigheid zien.
+- `buienradar.weatherStation.sunPower(stationNummer, id)` — Laat de huidige zonkracht zien.
+- `buienradar.weatherStation.rain.now(stationNummer, id)` — Laat de huidige hoeveelheid neerslag zien.
+- `buienradar.weatherStation.rain.last24Hours(stationNummer, id)` — Laat de hoeveelheid neerslag in de afgelopen 24 uur zien.
+- `buienradar.weatherStation.rain.lastHour(stationNummer, id)` — Laat de hoeveelheid neerslag in het afgelopen uur zien.
 
 ### Voorspellingen
 - `buienradar.forecast.report.published()` (datum/tijd) — Geeft het moment dat de voorspelling gepubliceerd is.
