@@ -359,11 +359,11 @@
                 speedBft: rendererForNearestStation('windspeedBft'),
             },
             airPressure: rendererForNearestStation('airpressure'),
-            visibiliy: rendererForNearestStation('visibility'),
+            visibility: rendererForNearestStation('visibility'),
             humidity: rendererForNearestStation('humidity'),
             sunPower: rendererForNearestStation('sunpower'),
             rain: {
-                now: rendererForNearestStation('precipation'),
+                now: rendererForNearestStation('precipitation'),
                 last24Hours: rendererForNearestStation('rainFallLast24Hour'),
                 lastHour: rendererForNearestStation('rainFallLastHour'),
             },
@@ -393,7 +393,7 @@
             humidity: rendererForStation('humidity'),
             sunPower: rendererForStation('sunpower'),
             rain: {
-                now: rendererForStation('precipation'),
+                now: rendererForStation('precipitation'),
                 last24Hours: rendererForStation('rainFallLast24Hour'),
                 lastHour: rendererForStation('rainFallLastHour'),
             },
