@@ -108,7 +108,7 @@
         return data.actual.stationmeasurements.reduce(({nearest, distance}, station) => {
             const stationPos = {lat: station.lat, lon: station.lon};
             const stationDistance = getDistance(pos, stationPos);
-            if (stationDistance < distance && station[search]) {
+            if (stationDistance < distance && (typeof station[search] !== 'undefined')) {
                 return {nearest: station, distance: stationDistance};
             } else {
                 return {nearest, distance};
@@ -144,7 +144,7 @@
             const station = getNearestWeatherStation(property);
 
             if (!station) {
-                throw new Error(`Station met ID ${stationId} bestaat niet`);
+                throw new Error('Dichtbij station niet gevonden!');
             }
 
             if (typeof station[property] !== 'undefined') {
