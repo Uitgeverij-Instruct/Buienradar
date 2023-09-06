@@ -239,8 +239,9 @@
         };
     }
 
-    async function showRainChart(id) {
+    async function showRainChart(id, demo) {
         const e = document.getElementById(id);
+        demo = demo || false;
 
         if (e === null) {
             console.error(`Je probeerde informatie weer te geven op een niet-bestaand element met ID ${id}!`);
@@ -248,6 +249,9 @@
         }
 
         const res = await cachedFetch(`https://gpsgadget.buienradar.nl/data/raintext?lat=${pos.lat}&lon=${pos.lon}`, false);
+
+        let demoDatapoint = Math.random() * .5;
+
         const dataPoints = res.split("\n").map((line) => {
             const matches = line.match(/^(\d{3})\|(\d\d:\d\d)/);
 
@@ -258,7 +262,12 @@
             const value = parseInt(matches[1], 10);
             const time = matches[2];
 
-            const mmPerHour = Math.pow(10, ((value - 109) / 32)).toFixed(1);
+            demoDatapoint += .5 * (0.5 - Math.random());
+            demoDatapoint = Math.max(0, demoDatapoint);
+
+            const mmPerHour = demo
+                ? demoDatapoint
+                : Math.pow(10, ((value - 109) / 32)).toFixed(1);
 
             return {time, mmPerHour};
         }).filter(v => v !== null);
