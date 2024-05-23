@@ -402,7 +402,7 @@
                 speedBft: rendererForStation('windspeedBft'),
             },
             airPressure: rendererForStation('airpressure'),
-            visibiliy: rendererForStation('visibility'),
+            visibility: rendererForStation('visibility'),
             humidity: rendererForStation('humidity'),
             sunPower: rendererForStation('sunpower'),
             rain: {

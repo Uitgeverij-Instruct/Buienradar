@@ -116,7 +116,6 @@ Als je browser hier ondersteuning voor heeft, en je toestemming geeft, wordt de 
 ### Voor een specifiek weerstation
 Deze functies zijn bijna hetzelfde als de functies voor het weerstation in de buurt, maar hebben een extra eerste parameter. Dit is het weerstationnummer van een station waarvoor je de informatie wil hebben.
 
-- `buienradar.weatherStation.cityName(stationNummer, id)` — Laat de dichtsbijzijnde grote plaatsnaam zien.
 - `buienradar.weatherStation.station.name(stationNummer, id)` — Laat de naam van het weerstation in de buurt zien.
 - `buienradar.weatherStation.station.regio(stationNummer, id)` — Laat de regio van het weerstation in de buurt zien.
 - `buienradar.weatherStation.icon(stationNummer, id)` (afbeelding) — Laat een icoon voor het huidige weer zien.
@@ -157,6 +156,7 @@ Deze functies zijn bijna hetzelfde als de functies voor het weerstation in de bu
 
 Voor onderstaande functies geldt dat je met `dag` opgeeft voor welke dag uit de vijfdaagse voorspelling je informatie wil zien. Het gevolg is dat `dag` minimaal `1` en maximaal `5` moet zijn.
 
+- `buienradar.forecast.fiveDays.day(dag)` (datum/tijd) - Geeft de datum waarop deze voorspelling van toepassing is.
 - `buienradar.forecast.fiveDays.temperature.min(id, dag)` — Laat de minimumtemperatuur voor een bepaalde dag zien.
 - `buienradar.forecast.fiveDays.temperature.max(id, dag)` — Laat de maximumtemperatuur voor een bepaalde dag zien.
 - `buienradar.forecast.fiveDays.rain.chance(id, dag)` — Laat de regenkans voor een bepaalde dag zien.
