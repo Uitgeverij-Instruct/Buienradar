@@ -145,14 +145,14 @@ Deze functies zijn bijna hetzelfde als de functies voor het weerstation in de bu
 - `buienradar.forecast.report.authorBio(id)` — Laat een korte biografie van de auteur van de weersvoorspelling zien.
 
 
-- `buienradar.forecast.report.shortTerm.start()` (datum/tijd) — Geeft het moment waar de kortetermijnvoorspelling begint.
-- `buienradar.forecast.report.shortTerm.end()` (datum/tijd) — Geeft het moment waar de kortetermijnvoorspelling eindigt.
-- `buienradar.forecast.report.shortTerm.forecast(id)` — Laat een kortetermijnvoorspelling zien.
+- `buienradar.forecast.shortTerm.start()` (datum/tijd) — Geeft het moment waar de kortetermijnvoorspelling begint.
+- `buienradar.forecast.shortTerm.end()` (datum/tijd) — Geeft het moment waar de kortetermijnvoorspelling eindigt.
+- `buienradar.forecast.shortTerm.forecast(id)` — Laat een kortetermijnvoorspelling zien.
 
 
-- `buienradar.forecast.report.longTerm.start()` (datum/tijd) — Geeft het moment waar de langetermijnvoorspelling begint.
-- `buienradar.forecast.report.longTerm.end()` (datum/tijd) — Geeft het moment waar de langetermijnvoorspelling eindigt.
-- `buienradar.forecast.report.longTerm.forecast(id)` — Laat een langetermijnvoorspelling zien.
+- `buienradar.forecast.longTerm.start()` (datum/tijd) — Geeft het moment waar de langetermijnvoorspelling begint.
+- `buienradar.forecast.longTerm.end()` (datum/tijd) — Geeft het moment waar de langetermijnvoorspelling eindigt.
+- `buienradar.forecast.longTerm.forecast(id)` — Laat een langetermijnvoorspelling zien.
 
 Voor onderstaande functies geldt dat je met `dag` opgeeft voor welke dag uit de vijfdaagse voorspelling je informatie wil zien. Het gevolg is dat `dag` minimaal `1` en maximaal `5` moet zijn.
 
